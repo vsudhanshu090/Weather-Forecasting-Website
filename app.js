@@ -6,36 +6,53 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.set("view engine" , "ejs");
+
+const apiKey = "5e5546a16a52d9b8a3244fcafcf55460";
+const unit = "metric";
+let city = "Udhampur";
+let url = "https://api.openweathermap.org/data/2.5/weather?q=Udhampur&appid=5e5546a16a52d9b8a3244fcafcf55460&units=metric";
+
+let weatherData;
+let temp;
+let weatherDescription;
+let iconUrl;
+
+https.get(url , function(response){
+
+    response.on("data" , function(data){
+        weatherData = JSON.parse(data);
+        temp = weatherData.main.temp;
+        weatherDescription = weatherData.weather[0].description;
+        //icon = weatherData.weather[0].icon;
+        //consticonUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+    })
+
+})
+
 
 app.get("/" , function(req,res){
-    res.sendFile(__dirname+"/index.html");
+    res.render("index", {city: city, temp: temp, weatherDescription: weatherDescription});
 })
 
 app.post("/" , function(req,res){
-    const city = req.body.cityName;
-    const apiKey = "5e5546a16a52d9b8a3244fcafcf55460";
-    const unit = "metric";
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + unit;
+    city = req.body.cityName;
+    url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=" + unit;
 
     https.get(url , function(response){
-        console.log(response.statusCode);
 
         response.on("data" , function(data){
-            const weatherData = JSON.parse(data);
-            const temp = weatherData.main.temp;
-            const weatherDescription = weatherData.weather[0].description;
-            const icon = weatherData.weather[0].icon;
-            const iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-            
-            res.write("<h1>CITY : " + city + "</h1>")
-            res.write("<p>Current weather description is : " + weatherDescription + "</p>");
-            res.write("<h1>Temperature is : " + temp + " degrees celsius.</h1>");
-            res.write("<img src=" + iconUrl + ">");
-            res.send();
+            weatherData = JSON.parse(data);
+            temp = weatherData.main.temp;
+            weatherDescription = weatherData.weather[0].description;
+            //icon = weatherData.weather[0].icon;
+            //iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
             
         })
+
     })
 
+    res.redirect("/");
 })
 
 
