@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Weather Forecast</title>
+	<title>Climate Companion</title>
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-	<form action="/" method="post">
-		<label for="cityInput">Enter city name : </label>
-		<input type="text" id="cityInput" name="cityName">
-		<br>
-		<button type="submit">Submit</button>
-	</form>
+	<div id="header">
+		<h1 id="intro-header">​Stay Ahead of the Weather with Our Expert Forecasting</h1>
+        <p id="intro-text">​Welcome to Climate Companion, your source for reliable and up-to-date weather information. 
+            Our website is dedicated to providing you with accurate forecasts, so you can plan your day with confidence. </p>
+	</div>
 
-    <h1>CITY : <%= city %> </h1>
+    <div id="search">
+        <form action="/" method="post" class="search-form">
+            <label for="cityInput">Enter city name : </label>
+			<input type="text" id="cityInput" name="cityName">
+			<br>
+			<button type="submit">Submit</button>
+        </form>
+    </div>
+
+
+	<h1>CITY : <%= city %> </h1>
     <p>Current weather description is : <%= weatherDescription %></p>
     <h1>Temperature is : <%= temp %> degrees celsius.</h1>
+
+
 </body>
 </html>

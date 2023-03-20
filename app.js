@@ -1,4 +1,3 @@
-// const { response } = require("express");
 const express = require("express");
 const https = require("https");
 const bodyParser = require("body-parser");
@@ -6,6 +5,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"));
 app.set("view engine" , "ejs");
 
 const apiKey = "5e5546a16a52d9b8a3244fcafcf55460";
@@ -42,20 +42,25 @@ app.post("/" , function(req,res){
     https.get(url , function(response){
 
         response.on("data" , function(data){
-            weatherData = JSON.parse(data);
-            temp = weatherData.main.temp;
-            weatherDescription = weatherData.weather[0].description;
-            //icon = weatherData.weather[0].icon;
-            //iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+            try {
+                weatherData = JSON.parse(data);
+                temp = weatherData.main.temp;
+                weatherDescription = weatherData.weather[0].description;
+                //icon = weatherData.weather[0].icon;
+                //iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+                res.render("index", {city: city, temp: temp, weatherDescription: weatherDescription});
+
+            } catch (error) {
+                console.error(error);
+                res.render("error", {message: "City not found"});
+            }
             
         })
 
     })
 
-    res.redirect("/");
+    
 })
-
-
 
 app.listen(3000 , function(){
     console.log("Server is running on port 3000");

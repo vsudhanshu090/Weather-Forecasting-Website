@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+/* Set box-sizing for all elements */
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;  
+}
+
+/* styles.css */
+#header {
+    background-image: url('/images/sky\ image.png');
+    background-size: cover;
+    color: white;
+    padding: 330px 170px;
+    width: auto;
+    height: 100vh;
+    background-position: 50% 100%;
+}
+
+#intro-header {
+    width: 65%;
+    font-size: 4vw;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1;
+}
+
+#intro-text{
+    width: 65%;
+    font-size: 1.35vw;
+    margin-top: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+/* search form */
+#search{
+    background-color: black;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .search-form input[type="text"] {
+    color: black;
+    width: 500px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px 0 0 5px;
+    border: none;
+    outline: none;
+  }
+  
+  .search-form button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .search-form button[type="submit"]:hover {
+    background-color: #0062cc;
+  }
+  
